@@ -28,8 +28,7 @@
 	</scm>
 	<properties>
 		<java.version>17</java.version>
-		<net-devh-grpc.version>2.10.0.RELEASE</net-devh-grpc.version>
-		<os-maven-plugin.version>1.6.0</os-maven-plugin.version>
+		<os-maven-plugin.version>1.7.1</os-maven-plugin.version>
 		<protobuf-maven-plugin.version>0.5.1</protobuf-maven-plugin.version>
 		<os.detected.classifier>windows-x86_64</os.detected.classifier>
 	</properties>
@@ -48,12 +47,19 @@
 		<dependency>
 			<groupId>net.devh</groupId>
 			<artifactId>grpc-client-spring-boot-starter</artifactId>
-			<version>2.10.1.RELEASE</version>
+			<version>3.1.0.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>net.devh</groupId>
 			<artifactId>grpc-server-spring-boot-starter</artifactId>
-			<version>2.10.1.RELEASE</version>
+			<version>3.1.0.RELEASE</version>
+		</dependency>
+		<dependency>
+			<!-- 为了适配高版本jdk引入 -->
+			<groupId>jakarta.annotation</groupId>
+			<artifactId>jakarta.annotation-api</artifactId>
+			<version>1.3.5</version>
+			<optional>true</optional>
 		</dependency>
 	</dependencies>
 
@@ -91,9 +97,10 @@
 				<artifactId>protobuf-maven-plugin</artifactId>
 				<version>${protobuf-maven-plugin.version}</version>
 				<configuration>
-					<protocArtifact>com.google.protobuf:protoc:3.5.1-1:exe:${os.detected.classifier}</protocArtifact>
+					<protocArtifact>com.google.protobuf:protoc:3.23.4:exe:${os.detected.classifier}</protocArtifact>
 					<pluginId>grpc-java</pluginId>
-					<pluginArtifact>io.grpc:protoc-gen-grpc-java:1.11.0:exe:${os.detected.classifier}</pluginArtifact>
+					<!-- 不兼容的话，就降版本，目前net.devh用的版本是1.58.0 -->
+					<pluginArtifact>io.grpc:protoc-gen-grpc-java:1.68.0:exe:${os.detected.classifier}</pluginArtifact>
 					<outputDirectory>${project.build.sourceDirectory}</outputDirectory>
 					<clearOutputDirectory>false</clearOutputDirectory>
 				</configuration>
