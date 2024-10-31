@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option java_multiple_files = false;
+
+option java_package = "com.common";
+
+option java_outer_classname = "UserProto";
+message RequestBody {
+  string name = 1;
+  int32 age = 2;
+}
+message ResponseBody{
+  string code = 1;
+  string message = 2;
+}
+
+service HelloService{
+    rpc  sayHello(RequestBody) returns (ResponseBody){}
+}
