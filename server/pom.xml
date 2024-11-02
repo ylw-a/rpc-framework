@@ -37,24 +37,6 @@
 			<groupId>com.example</groupId>
 			<artifactId>rpc-common-api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>grpc-core</artifactId>
-					<groupId>io.grpc</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>grpc-netty-shaded</artifactId>
-					<groupId>io.grpc</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>grpc-protobuf</artifactId>
-					<groupId>io.grpc</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>grpc-stub</artifactId>
-					<groupId>io.grpc</groupId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 
 		<dependency>
