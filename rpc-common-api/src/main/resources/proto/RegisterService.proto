@@ -1,0 +1,57 @@
+syntax = "proto3";
+option java_package = "com.framework.server.register";
+
+// 定义service -- 即 class
+service InstanceService {
+  // 定义 方法名   入参对象     返回      回参对象
+  rpc register (RegisterRequest) returns (RegisterResponse);
+}
+
+// 定义 入参对象
+// 其中的 1、2、3 只是为了排序
+message RegisterRequest {
+  string ip = 1;
+
+  int32 port = 2;
+
+  // 命名空间
+  optional string namespaceId = 3;
+
+  // 权重
+  optional int64 weight = 4;
+
+  // 是否上线
+  optional bool enabled = 5;
+
+  // 是否健康
+  optional bool healthy = 6;
+
+  // 扩展信息
+  optional string metadata = 7;
+
+  // 集群名称
+  optional string clusterName = 8;
+
+  // 服务名称
+  string serviceName = 9;
+
+  // 分组名称
+  optional string groupName = 10;
+
+  // 是否临时实例
+  optional bool ephemeral = 11;
+}
+
+// 定义 回参对象
+message RegisterResponse {
+  string message = 1;
+  int32 code = 2;
+  string error = 3;
+  string data = 4;
+}
+
+// 枚举值
+enum WhetherEnum {
+  yes = 0;
+  no = 1;
+}
