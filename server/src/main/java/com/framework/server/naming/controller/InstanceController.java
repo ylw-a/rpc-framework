@@ -1,5 +1,7 @@
 package com.framework.server.naming.controller;
 
+import com.framework.server.naming.pojo.InstanceServicePo;
+import com.framework.server.naming.util.NamingUtils;
 import com.framework.server.register.InstanceServiceGrpc;
 import com.framework.server.register.RegisterService;
 import io.grpc.stub.StreamObserver;
@@ -20,6 +22,16 @@ public class InstanceController extends InstanceServiceGrpc.InstanceServiceImplB
     @Override
     public void register(RegisterService.RegisterRequest request,
                          StreamObserver<RegisterService.RegisterResponse> responseObserver) {
+        String namespaceId = request.getNamespaceId();
+        String serviceName = request.getServiceName();
+
+        // 检查服务名称
+        NamingUtils.checkServiceName(serviceName);
+
+        InstanceServicePo instancePo = NamingUtils.convertInstancePo(request);
+
+        // TODO: 注册服务
+
         RegisterService.RegisterResponse resp = RegisterService.RegisterResponse.newBuilder()
                 .setCode(500).setMessage("Register success").setData("")
                 .build();

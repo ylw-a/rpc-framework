@@ -10,8 +10,10 @@ service InstanceService {
 // 定义 入参对象
 // 其中的 1、2、3 只是为了排序
 message RegisterRequest {
+  // ip地址
   string ip = 1;
 
+  // 接口
   int32 port = 2;
 
   // 命名空间
