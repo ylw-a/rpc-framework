@@ -1,16 +1,18 @@
 package com.framework.server.naming.controller;
 
 import com.framework.server.naming.pojo.InstanceServicePo;
+import com.framework.server.naming.service.InstanceOperatorService;
 import com.framework.server.naming.util.NamingUtils;
 import com.framework.server.register.InstanceServiceGrpc;
 import com.framework.server.register.RegisterService;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @GrpcService
-
 public class InstanceController extends InstanceServiceGrpc.InstanceServiceImplBase {
+    @Autowired
+    private InstanceOperatorService instanceOperatorService;
 
     /**
      * <h1>做服务注册</h1>
@@ -30,7 +32,8 @@ public class InstanceController extends InstanceServiceGrpc.InstanceServiceImplB
 
         InstanceServicePo instancePo = NamingUtils.convertInstancePo(request);
 
-        // TODO: 注册服务
+        // 注册服务
+        instanceOperatorService.createInstance(instancePo);
 
         RegisterService.RegisterResponse resp = RegisterService.RegisterResponse.newBuilder()
                 .setCode(500).setMessage("Register success").setData("")

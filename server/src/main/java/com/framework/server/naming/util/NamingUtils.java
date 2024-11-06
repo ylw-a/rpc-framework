@@ -1,5 +1,6 @@
 package com.framework.server.naming.util;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.framework.server.naming.exception.ServerException;
 import com.framework.server.naming.pojo.InstanceServicePo;
 import com.framework.server.register.RegisterService;
@@ -22,7 +23,18 @@ public final class NamingUtils {
     }
 
     public static InstanceServicePo convertInstancePo(RegisterService.RegisterRequest request) {
-        // todo 待实现
-        return new InstanceServicePo();
+        InstanceServicePo instanceServicePo = new InstanceServicePo();
+        BeanUtil.copyProperties(request, instanceServicePo, true);
+
+        // 如果有其他逻辑再往下加
+        return instanceServicePo;
+    }
+
+    public static void checkInstance(InstanceServicePo instancePo) {
+        if (ObjectUtils.isEmpty(instancePo)) {
+            throw new ServerException("instancePo is empty");
+        }
+
+        // 其他校验
     }
 }
