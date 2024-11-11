@@ -5,6 +5,7 @@ import com.framework.server.naming.exception.ServerException;
 import com.framework.server.naming.pojo.InstanceServicePo;
 import com.framework.server.register.RegisterService;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.Optional;
 
@@ -36,5 +37,25 @@ public final class NamingUtils {
         }
 
         // 其他校验
+    }
+
+    public static String getGroupName(final String serviceNameWithGroup) {
+        if (StringUtils.isEmpty(serviceNameWithGroup)) {
+            return "";
+        }
+        if (!serviceNameWithGroup.contains(NamingConstant.NAME_SEPA)) {
+            return NamingConstant.DEFAULT_GROUP;
+        }
+        return serviceNameWithGroup.split(NamingConstant.NAME_SEPA)[0];
+    }
+
+    public static String getServiceName(final String serviceNameWithGroup) {
+        if (StringUtils.isEmpty(serviceNameWithGroup)) {
+            return "";
+        }
+        if (!serviceNameWithGroup.contains(NamingConstant.NAME_SEPA)) {
+            return serviceNameWithGroup;
+        }
+        return serviceNameWithGroup.split(NamingConstant.NAME_SEPA)[1];
     }
 }
