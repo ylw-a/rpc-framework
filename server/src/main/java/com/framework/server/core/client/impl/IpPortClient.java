@@ -54,8 +54,11 @@ public class IpPortClient implements BaseClient {
     }
 
     @Override
-    public void addServiceInstance(String serviceName, InstanceServicePo instancePo) {
-
+    public void addServiceInstance(Service service, InstancePublishInfo instancePo) {
+        if (null == publishers.put(service, instancePo)) {
+            MetricsMonitor.incrementInstanceCount();
+        }
+        NotifyCenter.publishEvent(new ClientEvent.ClientChangedEvent(this));
     }
 
     @Override

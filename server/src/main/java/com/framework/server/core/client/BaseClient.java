@@ -1,6 +1,8 @@
 package com.framework.server.core.client;
 
+import com.framework.server.naming.pojo.InstancePublishInfo;
 import com.framework.server.naming.pojo.InstanceServicePo;
+import com.framework.server.naming.pojo.Service;
 
 /**
  * 客户端接口
@@ -33,10 +35,10 @@ public interface BaseClient {
     /**
      * 添加服务实例
      *
-      * @param serviceName 服务名称
+      * @param service 服务名称
      * @param instancePo 服务对象
      */
-    void addServiceInstance(String serviceName, InstanceServicePo instancePo);
+    void addServiceInstance(Service service, InstancePublishInfo instancePo);
 
     /**
      * 移除服务实例

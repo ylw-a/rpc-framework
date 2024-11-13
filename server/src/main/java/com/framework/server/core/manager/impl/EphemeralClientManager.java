@@ -3,6 +3,7 @@ package com.framework.server.core.manager.impl;
 import com.framework.server.core.client.BaseClient;
 import com.framework.server.core.client.impl.IpPortClient;
 import com.framework.server.core.manager.ClientManager;
+import com.framework.server.naming.exception.ServerException;
 import com.framework.server.naming.pojo.ClientAttributes;
 import lombok.Data;
 import org.springframework.stereotype.Component;
@@ -21,7 +22,10 @@ public class EphemeralClientManager implements ClientManager {
 
     @Override
     public BaseClient getClient(String clientId) {
-        return null;
+        if (!clients.containsKey(clientId)) {
+            throw new ServerException("client is not exists.");
+        }
+        return clients.get(clientId);
     }
 
     @Override

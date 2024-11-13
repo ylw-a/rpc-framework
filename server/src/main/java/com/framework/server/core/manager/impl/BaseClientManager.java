@@ -22,7 +22,7 @@ public class BaseClientManager implements ClientManager {
 
     @Override
     public BaseClient getClient(String clientId) {
-        return null;
+        return getClientManager(clientId).getClient(clientId);
     }
 
     @Override
